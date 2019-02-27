@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery-1.11.0.min.js"></script>
+    <style>
+        .fa{
+            width: 300px;
+            height: 500px;
+            border: 1px solid black;
+            position: relative;
+        }
+        .show {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .cut {
+            position: absolute;
+            left: 0;
+            bottom: 100px;
+            height: 100px;
+            width: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fa">
+        <div class="show"></div>
+        <div class="cut"></div>
+    </div>
+</body>
+
+<script>
+    $('body *').click(function (e) {
+        console.log(111);
+
+        // 触发该事件的直接元素
+        var type = e.target;
+        // 点击其他地方，悬浮框失去焦点隐藏,3种情况
+        // 1、点击的不是作者名称；2、点击的不是悬浮框；3、点击的直接元素不是悬浮框内某一个子元素
+        if (type.className != "show") {
+            $('.cut').hide();
+            // $('.jo-top-author li').removeClass('jo-active');
+        } else {
+            $('.cut').show();
+        }
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>行政区边界查询</title>
+    <!-- <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>  -->
+
+    <style>
+        html,
+        body,
+        #container {
+            margin: 0;
+            height: 100%;
+        }
+
+        .input-item-text {
+            width: 7rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=35ca2967fd997344b28936dfcd45e738&plugin=AMap.CustomLayer,AMap.ControlBar,AMap.Heatmap,AMap.Geocoder,AMap.DistrictSearch"></script>
+    <script type="text/javascript">
+        //初始化地图对象，加载地图
+        var map = new AMap.Map("container", {
+            resizeEnable: true,
+            center: [116.397428, 39.90923],//地图中心点
+            zoom: 10 //地图显示的缩放级别
+        });
+
+
+        var polygons = [];
+        function drawBounds() {
+            //加载行政区划插件
+
+            //实例化DistrictSearch
+            var opts = {
+                subdistrict: 0,   //获取边界不需要返回下级行政区
+                extensions: 'all',  //返回行政区边界坐标组等具体信息
+                level: 'district'  //查询行政级别为 市
+            };
+            district = new AMap.DistrictSearch(opts);
+
+            //行政区查询
+            district.setLevel('district')
+            district.search('秦淮区', function (status, result) {
+                map.remove(polygons)//清除上次结果
+                polygons = [];
+                var bounds = result.districtList[0].boundaries;
+                if (bounds) {
+                    for (var i = 0, l = bounds.length; i < l; i++) {
+                        //生成行政区划polygon
+                        var polygon = new AMap.Polygon({
+                            strokeWeight: 1,
+                            path: bounds[i],
+                            fillOpacity: 0,
+                            strokeColor: "#D13D61", //线颜色
+                            strokeOpacity: 1, //线透明度
+                            strokeWeight: 3, //线宽
+                            strokeStyle: "solid", //线样式
+                
+                        });
+                        polygons.push(polygon);
+                    }
+                }
+                map.add(polygons)
+                map.setFitView(polygons);//视口自适应
+            });
+        }
+        drawBounds();
+
+    </script>
+</body>
+
+</html>

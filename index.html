@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>二维码</title>
+    <script src="./js/jquery-1.11.0.min.js"></script>
+    <script src="./js/rem.js"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=35ca2967fd997344b28936dfcd45e738&plugin=AMap.CustomLayer,AMap.ControlBar,AMap.Heatmap,AMap.Geocoder,AMap.DistrictSearch"></script>
+    
+    <style>
+        html,
+        body {
+            font-family: '微软雅黑';
+        }
+
+        .header {
+            /* 1rem--10px */
+            width: 100%;
+            height: 80px;
+            background-color: #009EF7;
+            text-align: center;
+            font-size: 3.6rem;
+            line-height: 80px;
+            color: #fff;
+            position: relative;
+        }
+        .showewm{
+            position: absolute;
+            height: 2.6rem;
+            width: 2.6rem;
+            right: 20px;
+            top: 24px;
+        }
+        .showewm>img{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .ewmCut{
+            width: 150px;
+            height: 154px;
+            position: absolute;
+            right: 20px;
+            bottom: -154px;
+            z-index: 999999999;
+            background: url(./img/ewm.png);
+            display: none;
+        }
+        .bot-box {
+            width: 100%;
+            height: 800px;
+            /* background-color: pink; */
+            padding-left: 20px;
+            padding-right: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .map-box {
+
+            width: 100%;
+            height: 200px;
+            margin-top: 10px;
+            background-color: #fff;
+        }
+
+        .river-title {
+            width: 100%;
+            height: 50px;
+        }
+
+        .rt-txt {
+            width: 50%;
+            height: 50px;
+            line-height: 50px;
+            float: left;
+            color: #000;
+            font-size: 3rem;
+        }
+
+        .rt-more {
+            width: 50%;
+            height: 50px;
+            line-height: 50px;
+            float: right;
+            font-size: 2.8rem;
+            text-align: right;
+            color: #666;
+        }
+
+        .rt-main {
+            height: 200px;
+            width: 100%;
+        }
+
+        .rtm-title {
+            height: 30px;
+            width: 100%;
+            border-left: 6px solid #009EF5;
+            font-size: 3rem;
+            line-height: 30px;
+            padding-left: 10px;
+        }
+
+        .rtm-bb {
+            width: 100%;
+            height: 170px;
+        }
+
+        .rtm-posi {
+            height: 30px;
+            width: 100%;
+        }
+
+        .rtm-posi-s,
+        .rtm-posi-e {
+            width: 50%;
+            height: 30px;
+            float: left;
+            line-height: 30px;
+            font-size: 2.6rem;
+        }
+        .rtm-posi-h{
+            width: 100%;
+            height: 30px;
+            float: left;
+            line-height: 30px;
+            font-size: 2.6rem;
+        }
+        .rtm-posi-s>:nth-child(2),
+        .rtm-posi-e>:nth-child(2) ,
+        .rtm-posi-h>:nth-child(2) 
+        {
+            margin-left: 8px;
+            color: #666;
+
+        }
+
+        .rtm-jcd,
+        .rtm-cjhl {
+            width: 100%;
+            height: 70px;
+            font-size: 2.6rem;
+        }
+
+        .rtm-jcd>:nth-child(2),
+        .rtm-cjhl>:nth-child(2) {
+            color: #666;
+        }
+
+        .rt-hz {
+            height: 260px;
+            width: 100%;
+        }
+        .redColor{
+            color: #FC0314 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        河道信息
+        <!-- 二维码 -->
+        <div class="showewm"><img src="./img/扫描.png" alt="" class="showf"></div>
+        <div class="ewmCut"></div>
+    </div>
+    <!-- 下框 -->
+    <div class="bot-box">
+        <div class="map-box" id="mainMap"></div>
+        <div class="river-title">
+            <span class="rt-txt">外秦淮河七里街段</span>
+            <span class="rt-more">更多河流></span>
+        </div>
+        <!-- 河流信息 -->
+        <div class="rt-main">
+            <div class="rtm-title">河流信息</div>
+            <div class="rtm-bb">
+                <div class="rtm-posi">
+                    <div class="rtm-posi-s">
+                        <span>起点:</span>
+                        <span>九龙桥</span>
+                    </div>
+                    <div class="rtm-posi-e">
+                        <span>终点:</span>
+                        <span>红旗泵站</span>
+                    </div>
+                </div>
+                <div class="rtm-jcd">
+                    <span>监测点:</span>
+                    <span>东水关牌坊下游30米监测点,张公桥(铁窗棂) 红旗桥,红牛装饰公司</span>
+                </div>
+                <div class="rtm-cjhl">
+                    <span>次级河流:</span>
+                    <span>外秦淮河七里街段-夫子庙街道、外秦淮河七里街段-夫子庙街道</span>
+                </div>
+            </div>
+        </div>
+        <!-- 河长信息 -->
+        <div class="rt-hz">
+            <div class="rtm-title">河长信息</div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-s">
+                    <span>姓名:</span>
+                    <span>姜庄桥</span>
+                </div>
+                <div class="rtm-posi-e">
+                    <span>职务:</span>
+                    <span>社区书记</span>
+                </div>
+            </div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-s">
+                    <span>手机号:</span>
+                    <span>13912345678</span>
+                </div>
+                <div class="rtm-posi-e">
+                    <span>巡查距离(千米):</span>
+                    <span>1.5548</span>
+                </div>
+            </div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-h">
+                    <span>上报时间:</span>
+                    <span>2019-02-09 14:10:05</span>
+                </div>
+            </div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-h">
+                    <span>问题数量:</span>
+                    <span class="redColor">1</span>
+                </div>
+            </div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-h">
+                    <span>问题描述:</span>
+                    <span class="redColor">水质发黑发臭</span>
+                </div>
+            </div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-h">
+                    <span>河流名称:</span>
+                    <span>外秦淮河七里段</span>
+                </div>
+            </div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-h">
+                    <span>上报地址:</span>
+                    <span>秦淮区四方巷靠近四方新村</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/map.js"></script>
+<script src="./js/index.js"></script>
+</html>
