@@ -9,7 +9,7 @@
     <script src="./js/jquery-1.11.0.min.js"></script>
     <script src="./js/rem.js"></script>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=35ca2967fd997344b28936dfcd45e738&plugin=AMap.CustomLayer,AMap.ControlBar,AMap.Heatmap,AMap.Geocoder,AMap.DistrictSearch"></script>
-    
+
     <style>
         html,
         body {
@@ -27,22 +27,26 @@
             color: #fff;
             position: relative;
         }
-        .showewm{
+
+        .showewm {
             position: absolute;
-            height: 2.6rem;
-            width: 2.6rem;
+            height: 2.8rem;
+            width: 2.8rem;
             top: 50%;
-            transform: translate(-50%, -50%);    /* 50%为自身尺寸的一半 */
+            transform: translate(-50%, -50%);
+            /* 50%为自身尺寸的一半 */
             right: 20px;
         }
-        .showewm>img{
+
+        .showewm>img {
             position: absolute;
             top: 0;
             right: 0;
             width: 100%;
             height: 100%;
         }
-        .ewmCut{
+
+        .ewmCut {
             width: 150px;
             height: 154px;
             position: absolute;
@@ -52,6 +56,7 @@
             background: url(./img/ewm.png);
             display: none;
         }
+
         .bot-box {
             width: 100%;
             height: 800px;
@@ -92,6 +97,14 @@
             font-size: 2.8rem;
             text-align: right;
             color: #666;
+            position: relative;
+        }
+
+        .slv {
+            position: absolute;       
+            top: 50%;
+            transform: translate(-50%, -50%);
+            right: 0;
         }
 
         .rt-main {
@@ -126,17 +139,18 @@
             line-height: 30px;
             font-size: 2.6rem;
         }
-        .rtm-posi-h{
+
+        .rtm-posi-h {
             width: 100%;
             height: 30px;
             float: left;
             line-height: 30px;
             font-size: 2.6rem;
         }
+
         .rtm-posi-s>:nth-child(2),
-        .rtm-posi-e>:nth-child(2) ,
-        .rtm-posi-h>:nth-child(2) 
-        {
+        .rtm-posi-e>:nth-child(2),
+        .rtm-posi-h>:nth-child(2) {
             margin-left: 8px;
             color: #666;
 
@@ -158,7 +172,8 @@
             height: 260px;
             width: 100%;
         }
-        .redColor{
+
+        .redColor {
             color: #FC0314 !important;
         }
     </style>
@@ -169,7 +184,9 @@
     <div class="header">
         河道信息
         <!-- 二维码 -->
-        <div class="showewm"><img src="./img/扫描.png" alt="" class="showf"></div>
+        <div class="showewm">
+            <img src="./img/扫描.png" alt="" class="showf">
+        </div>
         <div class="ewmCut"></div>
     </div>
     <!-- 下框 -->
@@ -177,7 +194,13 @@
         <div class="map-box" id="mainMap"></div>
         <div class="river-title">
             <span class="rt-txt">外秦淮河七里街段</span>
-            <span class="rt-more">更多河流></span>
+            <span class="rt-more">更多河流>
+                <select name="" id="" class="slv">
+                    <option value="1">运粮河秦淮段(区级)</option>
+                    <option value="1">内秦淮河南段(区级)</option>
+                    <option value="1">运粮河(区级)</option>
+                </select>
+            </span>
         </div>
         <!-- 河流信息 -->
         <div class="rt-main">
@@ -261,4 +284,5 @@
 </body>
 <script src="./js/map.js"></script>
 <script src="./js/index.js"></script>
+
 </html>
