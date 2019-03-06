@@ -13,8 +13,8 @@ $('body *').click(function (e) {
 
 
 // 下拉/收起
-
-$('.sbtn').click(function () {
+$("body").undelegate();
+$("body").delegate(".sbtn", "click", function () {
     if ($(this).hasClass('upfla')) {
         $(this).prev().slideUp()
         $(this).removeClass('upfla');
@@ -22,7 +22,8 @@ $('.sbtn').click(function () {
         $(this).prev().slideDown()
         $(this).addClass('upfla');
     }
-})
+});
+
 // 获取下拉框列表
 qSlvRiver()
 function qSlvRiver() {
@@ -45,23 +46,39 @@ function qSlvRiver() {
 }
 
 // 获取河流详情
-qRiverMain(2, 22)
-function qRiverMain(a, b) {
+qRiverMain(5)
+function qRiverMain(a) {
     $.ajax({
-        url: 'http://hzz.cstor.cn:8967/hzz/oneRiverMes',
+        url: 'http://hzz.cstor.cn:8967/hzzDemo/RiverManage/riverByRiverId',
         type: 'post',
         dataType: "json",
         data: {
             riverId: a,
-            connectRiverId: b,
         },
         success: function (res) {
-            console.log(res.data.grade1RiverMes[0])
-
-            // $('#r_riverName').html(res.data.grade1RiverMes[0].riverName)
-            // $('#r_origin').html(res.data.grade1RiverMes[0].origin)
-            // $('#r_destination').html(res.data.grade1RiverMes[0].destination)
-            // $('#r_hzName').html(res.data.grade1RiverMes[0].userName)
+            console.log(res[0])
+            var riverData = res[0]
+            // 一级河流信息
+            $('#r_riverName').html(riverData.riverData)
+            $('#r_origin').html(riverData.origin)
+            $('#r_destination').html(riverData.destination)
+            $('#r_hzName').html(riverData.userName)
+            $('#r_duty').html(riverData.duty)
+            $('#r_tel').html(riverData.tel)
+            $('#r_loginTime').html(riverData.loginTime)
+            $('#r_riverChief').html(riverData.riverChief)
+            // 模板渲染
+            var html = template('rt-jd-data', riverData);
+            $('#rt-jd').html(html);
+            // 地图标点
+            var bXY = [riverData.bXY.split('#')[0], riverData.bXY.split('#')[1]]
+            var mXY = [riverData.mXY.split('#')[0], riverData.mXY.split('#')[1]]
+            var eXY = [riverData.eXY.split('#')[0], riverData.eXY.split('#')[1]]
+            map.clearMap();
+            
+            if(bXY[0]){
+                addMarker(bXY,mXY,eXY)
+            }
 
         }
     })
@@ -69,8 +86,7 @@ function qRiverMain(a, b) {
 
 $('#checkRiver').change(function () {
     var s_riverId = $(this).val()
-    var s_conId = $("#checkRiver").find("option:selected").attr("conId")
-    qRiverMain(s_riverId, s_conId)
+    qRiverMain(s_riverId)
 })
 
 

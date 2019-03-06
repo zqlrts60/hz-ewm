@@ -9,7 +9,7 @@
     <script src="./js/jquery-1.11.0.min.js"></script>
     <script src="./js/rem.js"></script>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.6&key=35ca2967fd997344b28936dfcd45e738&plugin=AMap.CustomLayer,AMap.ControlBar,AMap.Heatmap,AMap.Geocoder,AMap.DistrictSearch"></script>
-
+    <script src="./js/att.js"></script>
     <style>
         html,
         body {
@@ -198,6 +198,13 @@
             background: url(./img/收起.png) no-repeat;
             background-position: center center;
         }
+        .time-title{
+            font-size: 8px;
+        }
+        #r_loginTime {
+            font-size: 6px;
+            margin-left:0px;
+        }
     </style>
 </head>
 
@@ -218,9 +225,9 @@
             <span class="rt-txt" id="r_riverName">外秦淮河七里街段</span>
             <span class="rt-more">更多河流>
                 <select name="" id="checkRiver" class="slv">
-                    <option value="1">运粮河秦淮段(区级)</option>
+                    <!-- <option value="1">运粮河秦淮段(区级)</option>
                     <option value="2">内秦淮河南段(区级)</option>
-                    <option value="3">运粮河(区级)</option>
+                    <option value="3">运粮河(区级)</option> -->
                 </select>
             </span>
         </div>
@@ -241,23 +248,23 @@
                 <div class="rtm-posi">
                     <div class="rtm-posi-s">
                         <span>长度:</span>
-                        <span>6565米</span>
+                        <span ><span id="r_riverChief"></span>千米</span>
                     </div>
                 </div>
                 <div class="rtm-posi">
                     <div class="rtm-posi-s">
                         <span>河长:</span>
-                        <span>林涛</span>
+                        <span id="r_hzName">林涛</span>
                     </div>
                     <div class="rtm-posi-e">
                         <span>职位:</span>
-                        <span>书记</span>
+                        <span id="r_duty">书记</span>
                     </div>
                 </div>
                 <div class="rtm-posi">
                     <div class="rtm-posi-s">
                         <span>手机:</span>
-                        <span>13912345678</span>
+                        <span id="r_tel">13912345678</span>
                     </div>
                     <div class="rtm-posi-e">
                         <span>上报问题数量:</span>
@@ -266,8 +273,8 @@
                 </div>
                 <div class="rtm-posi">
                     <div class="rtm-posi-s">
-                        <span>登录时间:</span>
-                        <span>2019-3-1 11:28</span>
+                        <span class="time-title">登录时间:</span>
+                        <span id="r_loginTime">2019-03-05 14:27:31</span>
                     </div>
                     <div class="rtm-posi-e">
                         <span>巡查距离:</span>
@@ -282,116 +289,94 @@
             </div>
         </div>
         <!-- 街道级信息 -->
-        <div class="rt-jd">
-            <!-- 街道级 -->
-            <div class="rt-jd2">
-                <div class="rtm-title">街道级信息</div>
-                <div class="rtm-posi">
-                    <div class="rtm-posi-s">
-                        <span>街道名称:</span>
-                        <span>瑞金路街道</span>
-                    </div>
-                    <div class="rtm-posi-e">
-                        <span>河长:</span>
-                        <span>胡图图</span>
-                    </div>
-                </div>
-                <div class="rtm-posi">
-                    <div class="rtm-posi-s">
-                        <span>职位:</span>
-                        <span>书记</span>
-                    </div>
-                    <div class="rtm-posi-e">
-                        <span>电话</span>
-                        <span>13912345678</span>
-                    </div>
-                </div>
-                <div class="rtm-posi">
-                    <div class="rtm-posi-s">
-                        <span>起点:</span>
-                        <span>新街口</span>
-                    </div>
-                    <div class="rtm-posi-e">
-                        <span>终点:</span>
-                        <span>夫子庙</span>
-                    </div>
-                </div>
-            </div>
-            <!-- 社区级 -->
-            <div class="rt-jd3">
-                <div class="rt-jd3-s">
-                    <div class="rtm-title">社区级级信息</div>
-                    <div class="rtm-posi">
-                        <div class="rtm-posi-s">
-                            <span>社区名称:</span>
-                            <span>瑞金路设局</span>
-                        </div>
-                        <div class="rtm-posi-e">
-                            <span>河长:</span>
-                            <span>胡图图</span>
-                        </div>
-                    </div>
-                    <div class="rtm-posi">
-                        <div class="rtm-posi-s">
-                            <span>职位:</span>
-                            <span>书记</span>
-                        </div>
-                        <div class="rtm-posi-e">
-                            <span>电话</span>
-                            <span>13912345678</span>
-                        </div>
-                    </div>
-                    <div class="rtm-posi">
-                        <div class="rtm-posi-s">
-                            <span>起点:</span>
-                            <span>新街口</span>
-                        </div>
-                        <div class="rtm-posi-e">
-                            <span>终点:</span>
-                            <span>夫子庙</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="rt-jd3-s">
-                    <div class="rtm-title">社区级级信息</div>
-                    <div class="rtm-posi">
-                        <div class="rtm-posi-s">
-                            <span>社区名称:</span>
-                            <span>瑞金路设局</span>
-                        </div>
-                        <div class="rtm-posi-e">
-                            <span>河长:</span>
-                            <span>胡图图</span>
-                        </div>
-                    </div>
-                    <div class="rtm-posi">
-                        <div class="rtm-posi-s">
-                            <span>职位:</span>
-                            <span>书记</span>
-                        </div>
-                        <div class="rtm-posi-e">
-                            <span>电话</span>
-                            <span>13912345678</span>
-                        </div>
-                    </div>
-                    <div class="rtm-posi">
-                        <div class="rtm-posi-s">
-                            <span>起点:</span>
-                            <span>新街口</span>
-                        </div>
-                        <div class="rtm-posi-e">
-                            <span>终点:</span>
-                            <span>夫子庙</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 下拉/收起 -->
-            <div class="sbtn"></div>
+        <div class="rt-jd" id="rt-jd">
+            <!-- 模板渲染 -->
         </div>
     </div>
 </body>
 <script src="./js/map.js"></script>
+<script id="rt-jd-data" type="text/html">
+    <!-- 街道级 -->
+    {{each riverStreet}}
+    <div class="rt-jd2">
+        <div class="rtm-title">街道级信息</div>
+        <div class="rtm-posi">
+            <div class="rtm-posi-s">
+                <span>街道名称:</span>
+                <span>{{$value.streetName}}</span>
+            </div>
+            <div class="rtm-posi-e">
+                <span>河长:</span>
+                <span>{{$value.userName}}</span>
+            </div>
+        </div>
+        <div class="rtm-posi">
+            <div class="rtm-posi-s">
+                <span>职位:</span>
+                <span>{{$value.duty}}</span>
+            </div>
+            <div class="rtm-posi-e">
+                <span>电话</span>
+                <span>{{$value.tel}}</span>
+            </div>
+        </div>
+        <div class="rtm-posi">
+            <div class="rtm-posi-s">
+                <span>起点:</span>
+                <span>{{$value.origin}}</span>
+            </div>
+            <div class="rtm-posi-e">
+                <span>终点:</span>
+                <span>{{$value.destination}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- 社区级 -->
+    {{each $value.riverCommunity}}
+    <div class="rt-jd3">
+        <div class="rt-jd3-s">
+            <div class="rtm-title">社区级信息</div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-s">
+                    <span>社区名称:</span>
+                    <span>{{$value.communityName}}</span>
+                </div>
+                <div class="rtm-posi-e">
+                    <span>河长:</span>
+                    <span>{{$value.userName}}</span>
+                </div>
+            </div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-s">
+                    <span>职位:</span>
+                    <span>{{$value.duty}}</span>
+                </div>
+                <div class="rtm-posi-e">
+                    <span>电话</span>
+                    <span>{{$value.tel}}</span>
+                </div>
+            </div>
+            <div class="rtm-posi">
+                <div class="rtm-posi-s">
+                    <span>起点:</span>
+                    <span>{{$value.origin}}</span>
+                </div>
+                <div class="rtm-posi-e">
+                    <span>终点:</span>
+                    <span>{{$value.destination}}</span>
+                </div>
+            </div>
+        </div>   
+    </div>
+    {{/each}}
+    <!-- 下拉/收起 -->
+    {{if $value.riverCommunity.length !== 0}}
+    <div class="sbtn"></div>
+    {{/if}}
+    {{/each}}
+    </script>
 <script src="./js/index.js"></script>
-
+<script>
+ 
+</script>
 </html>

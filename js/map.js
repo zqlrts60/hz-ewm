@@ -36,7 +36,34 @@ function drawBounds() {
             }
         }
         map.add(polygons)
-        map.setFitView(polygons);//视口自适应
+        // map.setFitView(polygons);//视口自适应
     });
 }
+// 实例化点标记
+function addMarker(a,b,c) {
+    
+    var marker1 = new AMap.Marker({
+        icon: "./img/s.png",
+        position: new AMap.LngLat(a[0],a[1]),   
+        title: '起点'
+    });
+    var marker2 = new AMap.Marker({
+        icon: "./img/c.png",
+        position: new AMap.LngLat(b[0],b[1]),   
+        title: '经点'
+    });
+    var marker3 = new AMap.Marker({
+        icon: "./img/e.png",
+        position: new AMap.LngLat(c[0],c[1]),  
+        title: '终点'
+    });
+    var markerList=[marker1,marker2,marker3]
+    // 将创建的点标记添加到已有的地图实例：
+    map.add(markerList);
+    // map.setZoomAndCenter(15, [resdata.bXY.split('#')[0], resdata.bXY.split('#')[1]]);
+    map.setZoomAndCenter(15, [b[0],b[1]]);
+  
+}
 drawBounds();
+
+
